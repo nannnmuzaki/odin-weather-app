@@ -1,3 +1,10 @@
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("../fonts/SpaceGrotesk-VariableFont_wght.woff2") format("woff2");
+  font-weight: 200 700;
+  font-style: normal;
+}
+
 /*
   Josh's Custom CSS Reset
   https://www.joshwcomeau.com/css/custom-css-reset/
@@ -68,4 +75,205 @@ h6 {
 #root,
 #__next {
   isolation: isolate;
+}
+
+/* START FROM BELOW IS THIS PROJECT STYLING */
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Space Grotesk", monospace;
+}
+
+:root {
+  --bg-color: #e2e8f0;
+  --card-bg: #ffffff;
+  --accent-orange: #f97316;
+  --border-dark: #0f172a;
+  --shadow-dark: #0f172a;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--border-dark);
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+#content {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.box {
+  background-color: var(--card-bg);
+  border: 3px solid var(--border-dark);
+  box-shadow: 6px 6px 0px var(--shadow-dark);
+  padding: 1.5rem;
+}
+
+.btn {
+  background-color: var(--card-bg);
+  border: 2px solid var(--border-dark);
+  box-shadow: 3px 3px 0px var(--shadow-dark);
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+.btn:active {
+  box-shadow: 0px 0px 0px var(--shadow-dark);
+  transform: translate(3px, 3px);
+}
+
+.primary-btn,
+.active-card,
+.active-unit {
+  background-color: var(--accent-orange);
+}
+
+.input {
+  flex-grow: 1;
+  border: 2px solid var(--border-dark);
+  padding: 0.5rem;
+  font-size: 1rem;
+  outline: none;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.search-bar {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+
+.unit-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.top-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.massive-text {
+  font-size: 4rem;
+  font-weight: 500;
+}
+
+.large-temp {
+  font-size: 2.5rem;
+  font-weight: 500;
+}
+
+.current-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.icon-placeholder {
+  font-size: 2.5rem;
+}
+
+.daily-forecast {
+  display: flex;
+  gap: 1rem;
+  padding-bottom: 0.75rem;
+  padding-right: 0.5rem;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.forecast-card {
+  flex: 1;
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 2rem;
+  text-align: center;
+}
+
+.active-card {
+  min-width: 200px;
+}
+
+.forecast-card > h4 {
+  text-wrap: nowrap;
+}
+
+.date {
+  margin-top: 0.1rem;
+}
+
+.high,
+.low {
+  font-weight: 500;
+}
+
+.hourly-forecast {
+  padding: 1rem;
+}
+
+.hourly-scroll {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}
+
+.hourly-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 60px;
+}
+
+@media (max-width: 768px) {
+  .top-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 425px) {
+  * {
+    font-size: clamp(12px, 14px, 16px);
+  }
+
+  .massive-text {
+    font-size: clamp(1rem, 2rem, 3rem);
+  }
+
+  .large-temp {
+    font-size: clamp(1rem, 1.5rem, 2rem);
+  }
+
+  .header {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
 }

@@ -3,9 +3,132 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PROJECT TITLE</title>
+    <title>Weather App | The Odin Project</title>
   </head>
   <body>
-    <div id="content"></div>
+    <div id="content">
+      <header class="header box">
+        <form id="search-form" class="search-bar" novalidate>
+          <input
+            type="text"
+            id="location-input"
+            class="input"
+            placeholder="Enter city..."
+            value="Jakarta"
+          />
+          <button type="submit" class="btn primary-btn">Search</button>
+        </form>
+
+        <div class="unit-toggle">
+          <button id="btn-c" class="btn active-unit">°C</button>
+          <button id="btn-f" class="btn">°F</button>
+        </div>
+      </header>
+
+      <main class="dashboard">
+        <section class="top-row">
+          <div class="location-box box">
+            <h2 id="city-name" class="massive-text">Jakarta</h2>
+          </div>
+
+          <div class="current-weather-box box">
+            <div class="current-header">
+              <div id="current-icon" class="icon-placeholder">☀️</div>
+              <p id="current-temp" class="large-temp">45.6°C</p>
+            </div>
+            <p id="current-desc">
+              Similar temperatures continuing with a chance of rain multiple
+              days.
+            </p>
+          </div>
+        </section>
+
+        <section class="daily-forecast" id="daily-container">
+          <div class="forecast-card box active-card">
+            <h4>Wednesday [Today]</h4>
+            <p class="date">2026-03-26</p>
+            <div class="icon-placeholder">⛅</div>
+            <p><span class="high">Max : </span>49.9°C</p>
+            <p><span class="low">Min : </span>37.0°C</p>
+          </div>
+
+          <div class="forecast-card box">
+            <h4>Friday</h4>
+            <p class="date">2026-03-27</p>
+            <div class="icon-placeholder">🌧️</div>
+            <p class="high">51.9°C</p>
+            <p class="low">41.1°C</p>
+          </div>
+
+          <div class="forecast-card box">
+            <h4>Friday</h4>
+            <p class="date">2026-03-27</p>
+            <div class="icon-placeholder">🌧️</div>
+            <p class="high">51.9°C</p>
+            <p class="low">41.1°C</p>
+          </div>
+
+          <div class="forecast-card box">
+            <h4>Friday</h4>
+            <p class="date">2026-03-27</p>
+            <div class="icon-placeholder">🌧️</div>
+            <p class="high">51.9°C</p>
+            <p class="low">41.1°C</p>
+          </div>
+
+          <div class="forecast-card box">
+            <h4>Friday</h4>
+            <p class="date">2026-03-27</p>
+            <div class="icon-placeholder">🌧️</div>
+            <p class="high">51.9°C</p>
+            <p class="low">41.1°C</p>
+          </div>
+
+          <div class="forecast-card box">
+            <h4>Friday</h4>
+            <p class="date">2026-03-27</p>
+            <div class="icon-placeholder">🌧️</div>
+            <p class="high">51.9°C</p>
+            <p class="low">41.1°C</p>
+          </div>
+
+          <div class="forecast-card box">
+            <h4>Friday</h4>
+            <p class="date">2026-03-27</p>
+            <div class="icon-placeholder">🌧️</div>
+            <p class="high">51.9°C</p>
+            <p class="low">41.1°C</p>
+          </div>
+
+          <div class="forecast-card box">
+            <h4>Friday</h4>
+            <p class="date">2026-03-27</p>
+            <div class="icon-placeholder">🌧️</div>
+            <p class="high">51.9°C</p>
+            <p class="low">41.1°C</p>
+          </div>
+        </section>
+
+        <section class="hourly-forecast box">
+          <div class="hourly-scroll" id="hourly-container">
+            <div class="hourly-item">
+              <p>00:00</p>
+              <div class="icon-placeholder">🌙</div>
+              <p>40.2°C</p>
+            </div>
+            <div class="hourly-item">
+              <p>01:00</p>
+              <div class="icon-placeholder">🌙</div>
+              <p>39.9°C</p>
+            </div>
+            <div class="hourly-item">
+              <p>02:00</p>
+              <div class="icon-placeholder">🌙</div>
+              <p>39.2°C</p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
   </body>
 </html>
