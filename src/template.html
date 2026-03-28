@@ -11,18 +11,19 @@
         <form id="search-form" class="search-bar" novalidate>
           <input
             type="text"
+            name="location"
             id="location-input"
             class="input"
             placeholder="Enter city..."
             value="Jakarta"
           />
+          <input type="hidden" name="unit" id="unit-input" value="metric" />
           <button type="submit" class="btn primary-btn">Search</button>
+          <div class="unit-toggle">
+            <button type="button" id="btn-c" class="btn active-unit">°C</button>
+            <button type="button" id="btn-f" class="btn">°F</button>
+          </div>
         </form>
-
-        <div class="unit-toggle">
-          <button id="btn-c" class="btn active-unit">°C</button>
-          <button id="btn-f" class="btn">°F</button>
-        </div>
       </header>
 
       <main class="dashboard">

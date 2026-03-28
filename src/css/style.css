@@ -179,7 +179,7 @@ body {
 }
 
 .massive-text {
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: 500;
 }
 
@@ -204,6 +204,8 @@ body {
   padding-bottom: 0.75rem;
   padding-right: 0.5rem;
   overflow-x: auto;
+  scrollbar-gutter: stable;
+  scrollbar-color: rgba(0, 0, 0, 1) rgba(255, 255, 255, 0);
   scrollbar-width: thin;
 }
 
