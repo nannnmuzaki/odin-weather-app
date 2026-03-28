@@ -19,11 +19,11 @@
           />
           <input type="hidden" name="unit" id="unit-input" value="metric" />
           <button type="submit" class="btn primary-btn">Search</button>
-          <div class="unit-toggle">
-            <button type="button" id="btn-c" class="btn active-unit">°C</button>
-            <button type="button" id="btn-f" class="btn">°F</button>
-          </div>
         </form>
+        <div class="unit-toggle">
+          <button type="button" id="btn-c" class="btn active-unit">°C</button>
+          <button type="button" id="btn-f" class="btn">°F</button>
+        </div>
       </header>
 
       <main class="dashboard">
@@ -44,74 +44,115 @@
           </div>
         </section>
 
-        <section class="daily-forecast" id="daily-container">
-          <div class="forecast-card box active-card">
-            <h4>Wednesday [Today]</h4>
-            <p class="date">2026-03-26</p>
-            <div class="icon-placeholder">⛅</div>
-            <p><span class="high">Max : </span>49.9°C</p>
-            <p><span class="low">Min : </span>37.0°C</p>
-          </div>
-
-          <div class="forecast-card box">
-            <h4>Friday</h4>
-            <p class="date">2026-03-27</p>
-            <div class="icon-placeholder">🌧️</div>
-            <p class="high">51.9°C</p>
-            <p class="low">41.1°C</p>
-          </div>
-
-          <div class="forecast-card box">
-            <h4>Friday</h4>
-            <p class="date">2026-03-27</p>
-            <div class="icon-placeholder">🌧️</div>
-            <p class="high">51.9°C</p>
-            <p class="low">41.1°C</p>
-          </div>
-
-          <div class="forecast-card box">
-            <h4>Friday</h4>
-            <p class="date">2026-03-27</p>
-            <div class="icon-placeholder">🌧️</div>
-            <p class="high">51.9°C</p>
-            <p class="low">41.1°C</p>
-          </div>
-
-          <div class="forecast-card box">
-            <h4>Friday</h4>
-            <p class="date">2026-03-27</p>
-            <div class="icon-placeholder">🌧️</div>
-            <p class="high">51.9°C</p>
-            <p class="low">41.1°C</p>
-          </div>
-
-          <div class="forecast-card box">
-            <h4>Friday</h4>
-            <p class="date">2026-03-27</p>
-            <div class="icon-placeholder">🌧️</div>
-            <p class="high">51.9°C</p>
-            <p class="low">41.1°C</p>
-          </div>
-
-          <div class="forecast-card box">
-            <h4>Friday</h4>
-            <p class="date">2026-03-27</p>
-            <div class="icon-placeholder">🌧️</div>
-            <p class="high">51.9°C</p>
-            <p class="low">41.1°C</p>
-          </div>
-
-          <div class="forecast-card box">
-            <h4>Friday</h4>
-            <p class="date">2026-03-27</p>
-            <div class="icon-placeholder">🌧️</div>
-            <p class="high">51.9°C</p>
-            <p class="low">41.1°C</p>
+        <section class="box">
+          <div class="daily-scroll" id="daily-container">
+            <div class="forecast-card box active-card">
+              <h4>Wednesday</h4>
+              <p class="date">2026-03-26</p>
+              <div class="icon-placeholder">⛅</div>
+              <p><span class="max">Max : </span>49.9°C</p>
+              <p><span class="min">Min : </span>37.0°C</p>
+            </div>
+            <div class="forecast-card box">
+              <h4>Wednesday</h4>
+              <p class="date">2026-03-26</p>
+              <div class="icon-placeholder">⛅</div>
+              <p><span class="max">Max : </span>49.9°C</p>
+              <p><span class="min">Min : </span>37.0°C</p>
+            </div>
+            <div class="forecast-card box">
+              <h4>Wednesday</h4>
+              <p class="date">2026-03-26</p>
+              <div class="icon-placeholder">⛅</div>
+              <p><span class="max">Max : </span>49.9°C</p>
+              <p><span class="min">Min : </span>37.0°C</p>
+            </div>
+            <div class="forecast-card box">
+              <h4>Wednesday</h4>
+              <p class="date">2026-03-26</p>
+              <div class="icon-placeholder">⛅</div>
+              <p><span class="max">Max : </span>49.9°C</p>
+              <p><span class="min">Min : </span>37.0°C</p>
+            </div>
+            <div class="forecast-card box">
+              <h4>Wednesday</h4>
+              <p class="date">2026-03-26</p>
+              <div class="icon-placeholder">⛅</div>
+              <p><span class="max">Max : </span>49.9°C</p>
+              <p><span class="min">Min : </span>37.0°C</p>
+            </div>
+            <div class="forecast-card box">
+              <h4>Wednesday</h4>
+              <p class="date">2026-03-26</p>
+              <div class="icon-placeholder">⛅</div>
+              <p><span class="max">Max : </span>49.9°C</p>
+              <p><span class="min">Min : </span>37.0°C</p>
+            </div>
           </div>
         </section>
 
         <section class="hourly-forecast box">
           <div class="hourly-scroll" id="hourly-container">
+            <div class="hourly-item">
+              <p>00:00</p>
+              <div class="icon-placeholder">🌙</div>
+              <p>40.2°C</p>
+            </div>
+            <div class="hourly-item">
+              <p>01:00</p>
+              <div class="icon-placeholder">🌙</div>
+              <p>39.9°C</p>
+            </div>
+            <div class="hourly-item">
+              <p>02:00</p>
+              <div class="icon-placeholder">🌙</div>
+              <p>39.2°C</p>
+            </div>
+            <div class="hourly-item">
+              <p>00:00</p>
+              <div class="icon-placeholder">🌙</div>
+              <p>40.2°C</p>
+            </div>
+            <div class="hourly-item">
+              <p>01:00</p>
+              <div class="icon-placeholder">🌙</div>
+              <p>39.9°C</p>
+            </div>
+            <div class="hourly-item">
+              <p>02:00</p>
+              <div class="icon-placeholder">🌙</div>
+              <p>39.2°C</p>
+            </div>
+            <div class="hourly-item">
+              <p>00:00</p>
+              <div class="icon-placeholder">🌙</div>
+              <p>40.2°C</p>
+            </div>
+            <div class="hourly-item">
+              <p>01:00</p>
+              <div class="icon-placeholder">🌙</div>
+              <p>39.9°C</p>
+            </div>
+            <div class="hourly-item">
+              <p>02:00</p>
+              <div class="icon-placeholder">🌙</div>
+              <p>39.2°C</p>
+            </div>
+            <div class="hourly-item">
+              <p>00:00</p>
+              <div class="icon-placeholder">🌙</div>
+              <p>40.2°C</p>
+            </div>
+            <div class="hourly-item">
+              <p>01:00</p>
+              <div class="icon-placeholder">🌙</div>
+              <p>39.9°C</p>
+            </div>
+            <div class="hourly-item">
+              <p>02:00</p>
+              <div class="icon-placeholder">🌙</div>
+              <p>39.2°C</p>
+            </div>
             <div class="hourly-item">
               <p>00:00</p>
               <div class="icon-placeholder">🌙</div>
