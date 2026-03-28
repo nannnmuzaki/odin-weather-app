@@ -2,9 +2,9 @@
 
 ## Features
 
-* **Live Weather Data:** Fetches real-time, 7-day, and hourly forecast data using the Visual Crossing Weather API.
-* **Interactive Forecasts:** Clicking on any daily forecast card dynamically updates the 24-hour scrollable timeline below it.
-* **Unit Toggling:** Seamlessly switch between Celsius (Metric) and Fahrenheit (US).
+- **Live Weather Data:** Fetches real-time, 7-day, and hourly forecast data using the Visual Crossing Weather API.
+- **Interactive Forecasts:** Clicking on any daily forecast card dynamically updates the 24-hour scrollable timeline below it.
+- **Unit Toggling:** Seamlessly switch between Celsius (Metric) and Fahrenheit (US).
 
 ## What I Learned
 
