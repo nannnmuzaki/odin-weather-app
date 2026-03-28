@@ -1,6 +1,6 @@
 import "../css/style.css";
 
-const locationInput = document.querySelector("#location-input");
+// const locationInput = document.querySelector("#location-input");
 const unitInput = document.querySelector("#unit-input");
 const form = document.querySelector("#search-form");
 const btnCelcius = document.querySelector("#btn-c");
@@ -165,11 +165,22 @@ btnFahrenheit.addEventListener("click", (e) => {
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  if (!locationInput.value.trim()) {
-    throw new Error("Please enter a valid location");
-  }
+  // BUGS
+  // outright denying submit when location input is empty turns out introduce a bugs,
+  // when changing measurement unit while the location input is empty,
+  // it will not change the meeasurement unit because the location input is empty thus preventing data fetching
+  // if (!locationInput.value.trim()) {
+  //   throw new Error("Please enter a valid location");
+  // }
 
   const params = Object.fromEntries(new FormData(form));
+  if (!params.location.trim()) {
+    if (!cityName.textContent.trim()) {
+      params.location = "Jakarta";
+    } else {
+      params.location = cityName.textContent;
+    }
+  }
   handleSubmit(params);
 });
 
