@@ -1,6 +1,7 @@
 import "../css/style.css";
 
 // const locationInput = document.querySelector("#location-input");
+const errorMsg = document.querySelector("#error-msg");
 const unitInput = document.querySelector("#unit-input");
 const form = document.querySelector("#search-form");
 const btnCelcius = document.querySelector("#btn-c");
@@ -25,10 +26,19 @@ const iconSet = {
   "clear-night": "🌙",
 };
 
+let lastValidLocation = "Jakarta";
+
 async function fetchData(params) {
   const response = await fetch(
     `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${params.location}/next7days?unitGroup=${params.unit}&key=${API_KEY}&contentType=json`,
   );
+
+  if (!response.ok) {
+    const rawError = await response.text();
+    const prettyError = rawError.replace(/:(?=[^\s])/g, ": ");
+    throw new Error(`${response.status}. ${prettyError}`);
+  }
+
   const result = await response.json();
   console.log(result);
   return result;
@@ -64,80 +74,94 @@ function renderHourlyForecast(hoursArray, currentUnit) {
   });
 }
 
-async function handleSubmit(params) {
-  const result = await fetchData(params);
-  const currentUnit = unitInput.value;
+async function handleSubmit(fetchMethod) {
+  errorMsg.classList.remove("error-active");
 
-  cityName.textContent = result.resolvedAddress;
-  currentIcon.textContent = iconSet[result.currentConditions.icon];
-  currentTemp.textContent =
-    currentUnit === "metric"
-      ? `${result.currentConditions.temp}°C`
-      : `${result.currentConditions.temp}°F`;
-  currentDesc.textContent = result.description;
+  try {
+    cityName.textContent = "Loading...";
+    const result = await fetchMethod();
+    const currentUnit = unitInput.value;
 
-  dailyContainer.innerHTML = "";
+    // Store resolvedAddress for fallback
+    // when input is cleared/empty but user change measurement unit
+    // preventing bugs mentioned in form submit event listener
+    lastValidLocation = result.resolvedAddress;
 
-  renderHourlyForecast(result.days[0].hours, currentUnit);
-
-  result.days.forEach((day, index) => {
-    const isToday = index === 0;
-
-    const dateObj = new Date(day.datetime + "T00:00:00");
-
-    const forecastCard = document.createElement("div");
-    forecastCard.className = "forecast-card box";
-
-    const dayName = document.createElement("h4");
-    dayName.textContent = dateObj.toLocaleDateString("en-US", {
-      weekday: "long",
-    });
-
-    forecastCard.appendChild(dayName);
-
-    const date = document.createElement("p");
-    date.className = "date";
-    date.textContent = dateObj.toLocaleDateString().replaceAll("/", "-");
-
-    forecastCard.appendChild(date);
-
-    const dayWeatherIcon = document.createElement("div");
-    dayWeatherIcon.className = "icon-placeholder";
-    dayWeatherIcon.textContent = iconSet[day.icon];
-
-    forecastCard.appendChild(dayWeatherIcon);
-
-    const maxTemp = document.createElement("p");
-    maxTemp.className = "max";
-    maxTemp.textContent =
+    cityName.textContent = result.resolvedAddress;
+    currentIcon.textContent = iconSet[result.currentConditions.icon];
+    currentTemp.textContent =
       currentUnit === "metric"
-        ? `Max: ${day.tempmax}°C`
-        : `Max: ${day.tempmax}°F`;
+        ? `${result.currentConditions.temp}°C`
+        : `${result.currentConditions.temp}°F`;
+    currentDesc.textContent = result.description;
 
-    forecastCard.appendChild(maxTemp);
+    dailyContainer.innerHTML = "";
 
-    const minTemp = document.createElement("p");
-    minTemp.className = "min";
-    minTemp.textContent =
-      currentUnit === "metric"
-        ? `Min: ${day.tempmin}°C`
-        : `Min: ${day.tempmin}°F`;
+    renderHourlyForecast(result.days[0].hours, currentUnit);
 
-    forecastCard.appendChild(minTemp);
+    result.days.forEach((day, index) => {
+      const isToday = index === 0;
 
-    if (isToday) {
-      forecastCard.classList.add("active-card");
-      dayName.textContent = `${dateObj.toLocaleDateString("en-US", { weekday: "long" })} [Today]`;
-    }
+      const dateObj = new Date(day.datetime + "T00:00:00");
 
-    forecastCard.addEventListener("click", (e) => {
-      if (e.target.className.includes("active-card")) return;
+      const forecastCard = document.createElement("div");
+      forecastCard.className = "forecast-card box";
 
-      renderHourlyForecast(day.hours, currentUnit);
+      const dayName = document.createElement("h4");
+      dayName.textContent = dateObj.toLocaleDateString("en-US", {
+        weekday: "long",
+      });
+
+      forecastCard.appendChild(dayName);
+
+      const date = document.createElement("p");
+      date.className = "date";
+      date.textContent = dateObj.toLocaleDateString().replaceAll("/", "-");
+
+      forecastCard.appendChild(date);
+
+      const dayWeatherIcon = document.createElement("div");
+      dayWeatherIcon.className = "icon-placeholder";
+      dayWeatherIcon.textContent = iconSet[day.icon];
+
+      forecastCard.appendChild(dayWeatherIcon);
+
+      const maxTemp = document.createElement("p");
+      maxTemp.className = "max";
+      maxTemp.textContent =
+        currentUnit === "metric"
+          ? `Max: ${day.tempmax}°C`
+          : `Max: ${day.tempmax}°F`;
+
+      forecastCard.appendChild(maxTemp);
+
+      const minTemp = document.createElement("p");
+      minTemp.className = "min";
+      minTemp.textContent =
+        currentUnit === "metric"
+          ? `Min: ${day.tempmin}°C`
+          : `Min: ${day.tempmin}°F`;
+
+      forecastCard.appendChild(minTemp);
+
+      if (isToday) {
+        forecastCard.classList.add("active-card");
+        dayName.textContent = `${dateObj.toLocaleDateString("en-US", { weekday: "long" })} [Today]`;
+      }
+
+      forecastCard.addEventListener("click", (e) => {
+        if (e.target.className.includes("active-card")) return;
+
+        renderHourlyForecast(day.hours, currentUnit);
+      });
+
+      dailyContainer.appendChild(forecastCard);
     });
-
-    dailyContainer.appendChild(forecastCard);
-  });
+  } catch (error) {
+    errorMsg.classList.add("error-active");
+    errorMsg.textContent = error;
+    cityName.textContent = "Search Failed";
+  }
 }
 
 function handleUnitChange(selectedUnit) {
@@ -175,13 +199,13 @@ form.addEventListener("submit", (e) => {
 
   const params = Object.fromEntries(new FormData(form));
   if (!params.location.trim()) {
-    if (!cityName.textContent.trim()) {
+    if (!lastValidLocation) {
       params.location = "Jakarta";
     } else {
-      params.location = cityName.textContent;
+      params.location = lastValidLocation;
     }
   }
-  handleSubmit(params);
+  handleSubmit(() => fetchData(params));
 });
 
 dailyContainer.addEventListener("click", (e) => {
@@ -196,6 +220,6 @@ dailyContainer.addEventListener("click", (e) => {
   clickedCard.classList.add("active-card");
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-  handleSubmit({ location: "Jakarta", unit: "metric" });
+document.addEventListener("DOMContentLoaded", () => {
+  handleSubmit(() => fetchData({ location: "Jakarta", unit: "metric" }));
 });
