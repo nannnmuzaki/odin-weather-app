@@ -160,7 +160,15 @@ async function handleSubmit(fetchMethod) {
   } catch (error) {
     errorMsg.classList.add("error-active");
     errorMsg.textContent = error;
-    cityName.textContent = "Search Failed";
+
+    if (!lastValidLocation) {
+      cityName.textContent = "Search Failed";
+    } else {
+      cityName.textContent = "Search Failed";
+      setTimeout(() => {
+        cityName.textContent = lastValidLocation;
+      }, 200);
+    }
   }
 }
 
