@@ -176,14 +176,19 @@ btnCelcius.addEventListener("click", (e) => {
   handleUnitChange("metric");
   btnFahrenheit.classList.remove("active-unit");
   e.target.classList.add("active-unit");
-  form.dispatchEvent(new Event("submit"));
+
+  handleSubmit(() => {
+    return fetchData({ location: lastValidLocation, unit: "metric" });
+  });
 });
 
 btnFahrenheit.addEventListener("click", (e) => {
   handleUnitChange("us");
   btnCelcius.classList.remove("active-unit");
   e.target.classList.add("active-unit");
-  form.dispatchEvent(new Event("submit"));
+  handleSubmit(() => {
+    return fetchData({ location: lastValidLocation, unit: "us" });
+  });
 });
 
 form.addEventListener("submit", (e) => {
@@ -221,5 +226,7 @@ dailyContainer.addEventListener("click", (e) => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  handleSubmit(() => fetchData({ location: "Jakarta", unit: "metric" }));
+  handleSubmit(() => {
+    return fetchData({ location: "Jakarta", unit: "metric" });
+  });
 });
